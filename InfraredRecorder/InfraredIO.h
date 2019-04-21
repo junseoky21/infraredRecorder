@@ -24,9 +24,20 @@ extern "C" {
 #endif
 
     
-    
-void InfraredReceive();
 
+#define RECV_PIN 21 // Listen for changes at the pin 21
+
+
+
+int InfraredReceive(int pinnum, int timeoutuS, int opt);
+
+
+enum InfraredReceiveOption {
+    File = 0x1,
+    Print = 0x2
+};
+#define INFRA_RECV_FILE     0x1
+#define INFRA_RECV_PRINT    0x2
 
 
 

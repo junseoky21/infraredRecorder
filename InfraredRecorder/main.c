@@ -13,8 +13,6 @@
 
 
 
-
-#define RECV_PIN 21
 /*
  * 
  */
