@@ -29,13 +29,9 @@ extern "C" {
 
 
 
-int InfraredReceive(int pinnum, int timeoutuS, int opt);
+int InfraredReceive(int pinnum, int timeoutuS, int opt, FILE* fp);
 
 
-enum InfraredReceiveOption {
-    File = 0x1,
-    Print = 0x2
-};
 #define INFRA_RECV_FILE     0x1
 #define INFRA_RECV_PRINT    0x2
 

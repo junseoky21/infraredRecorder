@@ -25,7 +25,7 @@ void writeTime(FILE fp, int curState, long uS) {
  * @param opt options available in InfraredReceiveOption at the header file
  * @return 
  */
-int InfraredReceive(int pinnum, int timeoutuS, int opt, FILE* fp=NULL){
+int InfraredReceive(int pinnum, int timeoutuS, int opt, FILE* fp){
     wiringPiSetup ();
     pinMode (RECV_PIN, INPUT);
     pullUpDnControl (RECV_PIN, PUD_OFF) ;
@@ -34,7 +34,6 @@ int InfraredReceive(int pinnum, int timeoutuS, int opt, FILE* fp=NULL){
     struct timeval curTime;
     int captured = 0, signalTraverse;
     long signal[MAX_SIG_BUF_LEN];
-    
     // Listening for signal
     for (;;)
     {
@@ -66,17 +65,19 @@ int InfraredReceive(int pinnum, int timeoutuS, int opt, FILE* fp=NULL){
     }
     // Option Processing
     for (int i = 0; i < signalTraverse; i++) {
-        if (opt & InfraredReceiveOption.Print) {
-            printf("%ld,%ld\n", (!(fp % 2) ? "HIGH":"LOW"), signal[i]);
+        if (opt & INFRA_RECV_PRINT) {
+            printf("%s,%ld\n", (!(i % 2) ? "HIGH":"LOW"), signal[i]);
         }
-        if (opt & InfraredReceiveOption.File) {
+        if (opt & INFRA_RECV_FILE) {
             if (fp == NULL) {
                 return -1;
             }
             char lineBuf[64];
-            int charnum = sprintf(lineBuf, "%ld,%ld\n", (!(fp % 2) ? "HIGH":"LOW"), signal[i]);
+            int charnum = sprintf(lineBuf, "%ld,%ld\n", (!(i % 2) ? "HIGH":"LOW"), signal[i]);
             fwrite(lineBuf, sizeof(char), charnum, fp);
         }
     }
     return 0;   // return on success
 }
+
+
