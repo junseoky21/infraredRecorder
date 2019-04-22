@@ -25,7 +25,7 @@ void writeTime(FILE fp, int curState, long uS) {
  * @param opt options available in InfraredReceiveOption at the header file
  * @return 
  */
-int InfraredReceive(int pinnum, int timeoutuS, int opt, FILE* fp){
+int infraredReceive(int pinnum, int timeoutuS, int opt, FILE* fp){
     wiringPiSetup ();
     pinMode (RECV_PIN, INPUT);
     pullUpDnControl (RECV_PIN, PUD_OFF) ;
@@ -81,3 +81,4 @@ int InfraredReceive(int pinnum, int timeoutuS, int opt, FILE* fp){
 }
 
 
+int in

@@ -92,7 +92,7 @@ int main(int argc, char** argv) {
         if (arguments.verbose) {
             mask |= INFRA_RECV_PRINT;
         }
-        InfraredReceive(arguments.pinnum, 1, mask, outFP);
+        infraredReceive(arguments.pinnum, 1, mask, outFP);
     }
     else if (arguments.transmit) {
         
